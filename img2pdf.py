@@ -7,23 +7,23 @@ root = Tk()
 root.geometry("680x460")
 root.resizable(width=False,height=False)
 root.configure(bg="lavender")
-img = []
+img = []                # adding image full location
 count = 0
-imagestack = []
-imgname = []
-def makepdf(x):
-    print(type(x))
+imagestack = []        # collecting pill images.End product
+imgname = []           # not using right now. but this is for collecting img names.
+def makepdf(x):         # this function creates pdf
+    print(x)
     for i in img:
         image = Image.open(i)
         im = image.convert('RGB')
         imagestack.append(im)
-    if x ==1:
+    if x ==1:                                               # for 1 pdf of multiple selected images
         im.save(r'combine.pdf',save_all=True,append_images=imagestack)
-    else:
+    else:                                                  # for 1 pdf for each selected images.
         for i in imagestack:
             i.save(r'1.pdf')
 
-def open_file():
+def open_file():                  # get file locations
     global count
     file = askopenfile(mode='r',filetypes=[('png/jpg/jpeg files','*.*')])
     file = str(file)
@@ -51,14 +51,13 @@ var1 = IntVar()
 checkbut1 = Checkbutton(root,font=("Verdana",14),text="One PDF for multiple Selected images",bg="lavender",fg="black",variable=var1)
 checkbut1.place(x=250,y=68)
 
-#lavbott = Label(root,text="Test",font=("Verdana",10),bg="white",fg="blue")
-#lavbott.place(x=40,y=130)
+
 
 labright = Label(root,text="Instructions\n 1.Selected Images are shown in Left Box.\n 2.By Default it will generate 1 PDF for each\n images. \n 3.Fill the check box to generate one PDF for\n all images.\n. Thanks for using.",font=(12),bg="lavender",fg="black")
 labright.place(x=250,y=130)
 
 
-btn2 = Button(root,text="Convert",font=(12),bg="orange",fg="black",command= lambda:makepdf(1))
+btn2 = Button(root,text="Convert",font=(12),bg="orange",fg="black",command= lambda:makepdf(var1.get()))
 btn2.place(x=35,y=380)
 mainloop()
 
