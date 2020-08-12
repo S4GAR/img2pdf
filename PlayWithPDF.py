@@ -1,27 +1,37 @@
+#importing modules here
 from tkinter import *
 from tkinter import ttk
 from PIL import Image
 from tkinter.filedialog import askopenfile
 
+#Creating main window
 root = Tk()
 root.geometry("680x460")
 root.resizable(width=False,height=False)
 root.configure(bg="lavender")
 
+#small frame inside main window
 fr = Frame(root)
 fr.pack(side=LEFT)
 
+#stores location of image file
 img = []
+#counter used to store image name inside scroller
 count = 1
+#This contain PILL type of all the images under img
 imagestack = []
+#does noting dont know why I included this
 imgname = []
 
+#scroller
 sbr = Scrollbar(fr,bg="red")
 sbr.pack(side=RIGHT,fill="y")
 
+#companion of Scroller
 lbx = Listbox(fr,font=("Verdona",14),bg="lavender blush",fg="black")
 lbx.pack(side=LEFT,fill="x",expand=True)
 
+#this function creates pdf here.
 def makepdf(x):
     for i in img:
         image = Image.open(i)
@@ -36,6 +46,7 @@ def makepdf(x):
     done = Label(text="Done",bg="lavender",fg="Green")
     done.place(x=180,y=385)
 
+#This function browse file and do some filtering
 def open_file():
     global count
     file = askopenfile(mode='r',filetypes=[('png/jpg/jpeg files','*.*')])
@@ -52,11 +63,14 @@ def open_file():
     else:
         print("Forget it")
 
+#scroll-bar configuration
 sbr.config(command=lbx.yview)
 
+#this is the top label
 labtop = Label(root,text="PlayWithPDF",font=("Verdana",16),padx=300,pady=5,bg="orange",fg="black")
 labtop.place(x=0,y=0)
 
+# Button to start browsing
 btn = Button(root,text='Browse',font=("Verdana",14),command= lambda:open_file())
 btn.place(x=35,y=60)
 
