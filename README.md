@@ -11,5 +11,6 @@ A step taken to maintain the privacy. This offline image to pdf convertor saves 
 ```
 # 2. Windows
 ```
-Working on it.
+pip/pip3 install Pillow
+python/python3 PlayWithPDF.py
 ```
